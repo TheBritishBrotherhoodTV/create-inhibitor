@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "x": 90
+    },
+    "facing=down,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "x": 90
+    },
+    "facing=up,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "x": -90
+    },
+    "facing=up,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "x": -90
+    },
+    "facing=north,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor"
+    },
+    "facing=north,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor"
+    },
+    "facing=south,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 180
+    },
+    "facing=south,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 270
+    },
+    "facing=east,lit=false": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 90
+    },
+    "facing=east,lit=true": {
+      "model": "createinhibitor:block/rotational_inhibitor",
+      "y": 90
+    }
+  }
+}

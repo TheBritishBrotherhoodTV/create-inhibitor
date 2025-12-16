@@ -1,0 +1,138 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.76', changing: true
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = '1.0.0'
+group = 'com.createinhibitor'
+archivesBaseName = 'createinhibitor'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'createinhibitor'
+            mods {
+                createinhibitor {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'createinhibitor'
+            mods {
+                createinhibitor {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'createinhibitor'
+            mods {
+                createinhibitor {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'createinhibitor', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                createinhibitor {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = 'Progwm16 maven'
+        url = 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        name = 'Create Mod Maven'
+        url = 'https://maven.createmod.net' // Create, Ponder, Flywheel
+    }
+    maven {
+        name = 'tterrag maven'
+        url = 'https://maven.tterrag.com' // Registrate
+    }
+    maven {
+        name = 'CurseMaven'
+        url = 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
+    
+    // Create mod dependencies
+    implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+}
+
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def replaceProperties = [
+    minecraft_version: minecraft_version,
+    minecraft_version_range: minecraft_version_range,
+    forge_version: forge_version,
+    forge_version_range: forge_version_range,
+    loader_version_range: loader_version_range,
+    create_version: create_version,
+    create_version_range: create_version_range,
+    mod_id: 'createinhibitor',
+    mod_version: project.version,
+    mod_name: 'Create Inhibitor',
+    mod_description: 'A Create add-on mod that adds the Rotational Inhibitor block, which prevents hostile mob spawns in a radius based on rotational speed.',
+    mod_authors: 'TheBritishBrotherhood',
+    mod_license: 'MIT'
+]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
