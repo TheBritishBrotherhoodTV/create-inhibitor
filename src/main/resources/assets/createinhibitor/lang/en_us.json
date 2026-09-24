@@ -1,0 +1,12 @@
+{
+  "itemGroup.createinhibitor": "Create: Inhibitor",
+  "block.createinhibitor.rotational_inhibitor": "Rotational Inhibitor",
+  "item.createinhibitor.rotational_inhibitor": "Rotational Inhibitor",
+  "ponder.createinhibitor.rotational_inhibitor": "Rotational Inhibitor",
+  "ponder.createinhibitor.rotational_inhibitor.header": "Rotational Inhibitor",
+  "ponder.createinhibitor.rotational_inhibitor.summary": "The Rotational Inhibitor prevents hostile mob spawns in a radius around it. Higher rotational speed increases the protected radius.",
+  "ponder.createinhibitor.rotational_inhibitor.condition_1": "The Rotational Inhibitor prevents hostile mob spawns.",
+  "ponder.createinhibitor.rotational_inhibitor.condition_2": "Higher rotational speed increases the protected radius.",
+  "ponder.createinhibitor.rotational_inhibitor.condition_3": "Requires significant stress capacity."
+}
+

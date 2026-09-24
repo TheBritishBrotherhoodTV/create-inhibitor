@@ -1,0 +1,30 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " I ",
+    "BCB",
+    "ETE"
+  ],
+  "key": {
+    "I": {
+      "item": "create:iron_sheet"
+    },
+    "B": {
+      "item": "create:brass_casing"
+    },
+    "C": {
+      "item": "create:precision_mechanism"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "T": {
+      "item": "create:copper_sheet"
+    }
+  },
+  "result": {
+    "item": "createinhibitor:rotational_inhibitor",
+    "count": 1
+  }
+}
+
