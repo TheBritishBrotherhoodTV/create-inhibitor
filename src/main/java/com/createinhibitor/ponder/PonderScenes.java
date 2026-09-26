@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 public class PonderScenes {
     
     public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+        PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
         ResourceLocation utilityTag = ResourceLocation.fromNamespaceAndPath(CreateInhibitor.MODID, "utility");
         
         HELPER.forComponents(CreateInhibitor.ROTATIONAL_INHIBITOR)

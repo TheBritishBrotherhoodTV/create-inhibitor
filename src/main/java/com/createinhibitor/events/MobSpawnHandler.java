@@ -6,16 +6,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 
-@Mod.EventBusSubscriber(modid = com.createinhibitor.CreateInhibitor.MODID)
+@EventBusSubscriber(modid = CreateInhibitor.MODID)
 public class MobSpawnHandler {
     
     private static final int MAX_SEARCH_RADIUS = 64;
     
-    @SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.HIGHEST)
-    public static void onMobSpawn(net.minecraftforge.event.entity.living.MobSpawnEvent.FinalizeSpawn event) {
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onMobSpawn(FinalizeSpawnEvent event) {
         if (event.getEntity().level().isClientSide) {
             return;
         }
@@ -89,7 +91,7 @@ public class MobSpawnHandler {
                                                 String.format("%.1f", inhibitor.getCurrentRPM()),
                                                 checkPos);
                                             
-                                            event.setResult(net.minecraftforge.eventbus.api.Event.Result.DENY);
+                                            event.setSpawnCancelled(true);
                                             event.setCanceled(true);
                                             
                                             if (event.getEntity().isAlive()) {
@@ -110,4 +112,3 @@ public class MobSpawnHandler {
         }
     }
 }
-

@@ -11,9 +11,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.joml.Matrix4f;
 
 public class RadiusDebugRenderer {
@@ -122,8 +122,8 @@ public class RadiusDebugRenderer {
             float x2 = (float) (Math.cos(angle2) * radius);
             float z2 = (float) (Math.sin(angle2) * radius);
             
-            buffer.vertex(matrix, x1, 0.5f, z1).color(r, g, b, 255).normal(0, 1, 0).endVertex();
-            buffer.vertex(matrix, x2, 0.5f, z2).color(r, g, b, 255).normal(0, 1, 0).endVertex();
+            buffer.addVertex(matrix, x1, 0.5f, z1).setColor(r, g, b, 255).setNormal(0, 1, 0);
+            buffer.addVertex(matrix, x2, 0.5f, z2).setColor(r, g, b, 255).setNormal(0, 1, 0);
         }
         
         for (int i = 0; i < segments; i++) {
@@ -135,11 +135,11 @@ public class RadiusDebugRenderer {
             float x2 = (float) (Math.cos(angle2) * radius);
             float z2 = (float) (Math.sin(angle2) * radius);
             
-            buffer.vertex(matrix, x1, 0.5f, 0).color(r, g, b, 255).normal(1, 0, 0).endVertex();
-            buffer.vertex(matrix, x2, 0.5f, 0).color(r, g, b, 255).normal(1, 0, 0).endVertex();
+            buffer.addVertex(matrix, x1, 0.5f, 0).setColor(r, g, b, 255).setNormal(1, 0, 0);
+            buffer.addVertex(matrix, x2, 0.5f, 0).setColor(r, g, b, 255).setNormal(1, 0, 0);
             
-            buffer.vertex(matrix, 0, 0.5f, z1).color(r, g, b, 255).normal(0, 0, 1).endVertex();
-            buffer.vertex(matrix, 0, 0.5f, z2).color(r, g, b, 255).normal(0, 0, 1).endVertex();
+            buffer.addVertex(matrix, 0, 0.5f, z1).setColor(r, g, b, 255).setNormal(0, 0, 1);
+            buffer.addVertex(matrix, 0, 0.5f, z2).setColor(r, g, b, 255).setNormal(0, 0, 1);
         }
         
         bufferSource.endBatch(RenderType.lines());
@@ -147,7 +147,6 @@ public class RadiusDebugRenderer {
     }
     
     public static void register() {
-        MinecraftForge.EVENT_BUS.register(RadiusDebugRenderer.class);
+        NeoForge.EVENT_BUS.register(RadiusDebugRenderer.class);
     }
 }
-

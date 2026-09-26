@@ -20,7 +20,7 @@ public class PonderPlugin implements net.createmod.ponder.api.registration.Ponde
     
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
-        PonderTagRegistrationHelper<com.tterrag.registrate.util.entry.RegistryEntry<?>> HELPER = 
+        PonderTagRegistrationHelper<com.tterrag.registrate.util.entry.RegistryEntry<?, ?>> HELPER = 
             helper.withKeyFunction(com.tterrag.registrate.util.entry.RegistryEntry::getId);
         ResourceLocation utilityTag = ResourceLocation.fromNamespaceAndPath(CreateInhibitor.MODID, "utility");
         
@@ -36,4 +36,3 @@ public class PonderPlugin implements net.createmod.ponder.api.registration.Ponde
     public void registerSharedText(SharedTextRegistrationHelper helper) {
     }
 }
-

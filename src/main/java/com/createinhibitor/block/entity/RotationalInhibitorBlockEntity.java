@@ -3,6 +3,7 @@ package com.createinhibitor.block.entity;
 import com.createinhibitor.CreateInhibitor;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -83,8 +84,8 @@ public class RotationalInhibitorBlockEntity extends KineticBlockEntity {
     }
     
     @Override
-    protected void write(CompoundTag tag, boolean clientPacket) {
-        super.write(tag, clientPacket);
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(tag, registries, clientPacket);
         tag.putFloat("CurrentRPM", currentRPM);
         tag.putDouble("CurrentRadius", currentRadius);
         tag.putBoolean("IsActive", isActive);
@@ -95,8 +96,8 @@ public class RotationalInhibitorBlockEntity extends KineticBlockEntity {
     }
     
     @Override
-    protected void read(CompoundTag tag, boolean clientPacket) {
-        super.read(tag, clientPacket);
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(tag, registries, clientPacket);
         currentRPM = tag.getFloat("CurrentRPM");
         currentRadius = tag.getDouble("CurrentRadius");
         isActive = tag.getBoolean("IsActive");
@@ -108,4 +109,3 @@ public class RotationalInhibitorBlockEntity extends KineticBlockEntity {
         return 8.0f;
     }
 }
-
